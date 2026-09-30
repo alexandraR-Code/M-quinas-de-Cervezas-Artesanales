@@ -49,4 +49,22 @@ public class NegocioMejorado {
 		}
 	}
 
+	// Metodo recuperar maquina
+	// recibe codigo de la maquina
+	public Maquina recuperarMaquina(String codigo) {
+		// Busca en la lista
+		for (int i = 0; i < maquinas.size(); i++) {
+			Maquina m = maquinas.get(i);
+			// Recibe el codigo, recorre la lista y compara el codigo de cada maquina con
+			// .equals()
+			if (m.getCodigo().equals(codigo)) {
+				// Si la encuentra la retorna en ese momento; si termina el for sin encontrarla,
+				// retorna null
+				return m;
+			}
+		}
+		return null;
+
+	}
+
 }
