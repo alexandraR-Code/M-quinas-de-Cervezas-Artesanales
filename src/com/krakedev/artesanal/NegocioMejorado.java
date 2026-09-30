@@ -7,6 +7,11 @@ public class NegocioMejorado {
 	// Atributo: lista (ArrayList) donde el negocio guarda TODAS sus maquinas.
 	// Es la evolucion de Negocio, que solo tenia una maquina (maquinaA)
 	ArrayList<Maquina> maquinas;
+	
+	// Atributo: lista donde el negocio guarda los clientes registrados.
+	// A proposito NO se inicializa (punto 8 del taller): vale null,
+	// por eso al hacer clientes.add(...) se producira un NullPointerException
+	private ArrayList<Cliente> clientes;
 
 	// Getter y setter del atributo maquinas (encapsulamiento)
 	public ArrayList<Maquina> getMaquinas() {
