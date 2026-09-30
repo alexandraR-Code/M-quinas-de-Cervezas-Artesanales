@@ -28,18 +28,15 @@ public class NegocioMejorado {
 	}
 
 	// Metodo AgregarMaquina
-	// Recibe los datos de la cerveza, genera un codigo y lo guarda en una lista y la devulve
-	public ArrayList<Maquina> agregarMaquina(String nombreCerveza, String descripcion, double precioPorML) {
-		// Inicializa una lista vacia de maquina
-		ArrayList<Maquina> listaMaquina = new ArrayList<Maquina>();
+	// Recibe los datos de la cerveza, genera un codigo, crea la maquina
+	// y la guarda en el atributo maquinas (la lista del negocio)
+	public void agregarMaquina(String nombreCerveza, String descripcion, double precioPorML) {
 		// Genera el codigo aleatorio invocando el metodo
 		String codigoGenerado = generarCodigo();
-		// crea el objeto maquina con todos los datos
+		// crea el una nuevaMaquina yla agrega a maquina con todos los datos
 		Maquina nuevaMaquina = new Maquina(nombreCerveza, descripcion, precioPorML, codigoGenerado);
 		// Agrega la maquina a la lista
-		listaMaquina.add(nuevaMaquina);
-		// Retorna la lista con el objeto guardado
-		return listaMaquina;
+		maquinas.add(nuevaMaquina);
 	}
 
 }
