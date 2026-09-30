@@ -4,10 +4,11 @@ import java.util.ArrayList;
 
 public class NegocioMejorado {
 
-	// Atributo maquinas del tipo ArrayList
+	// Atributo: lista (ArrayList) donde el negocio guarda TODAS sus maquinas.
+	// Es la evolucion de Negocio, que solo tenia una maquina (maquinaA)
 	ArrayList<Maquina> maquinas;
 
-	// Creacion de getter y setter
+	// Getter y setter del atributo maquinas (encapsulamiento)
 	public ArrayList<Maquina> getMaquinas() {
 		return maquinas;
 	}
@@ -16,55 +17,71 @@ public class NegocioMejorado {
 		this.maquinas = maquinas;
 	}
 
-	// ConstructorS
+	// Constructor: crea la lista vacia UNA sola vez al crear el negocio.
+	// Si no se inicializa, la lista seria null y el primer add daria
+	// NullPointerException
 	public NegocioMejorado() {
 		maquinas = new ArrayList<Maquina>();
 	}
 
-	// Metodo generar codigo de manera aleatoria
+	// Metodo generarCodigo: no recibe parametros y retorna un codigo tipo "M-25".
+	// Math.random() da 0 a 0.99 -> *100 da 0 a 99.9 -> (int) corta a 0..99 -> +1 da
+	// 1..100
 	public String generarCodigo() {
 		int numeroAleatorio = (int) (Math.random() * 100) + 1;
 		return "M-" + numeroAleatorio;
 	}
 
-	// Metodo AgregarMaquina
-	// Recibe los datos de la cerveza, genera un codigo, crea la maquina
-	// y la guarda en el atributo maquinas (la lista del negocio)
-	public void agregarMaquina(String nombreCerveza, String descripcion, double precioPorML) {
-		// Genera el codigo aleatorio invocando el metodo
+	// Metodo agregarMaquina: recibe los datos de la cerveza, genera un codigo
+	// y agrega la maquina a la lista SOLO si ese codigo no existe (validacion de
+	// duplicados).
+	// Retorna true si la agrego y false si el codigo ya estaba en uso
+	public boolean agregarMaquina(String nombreCerveza, String descripcion, double precioPorML) {
+		// 1. Genera el codigo aleatorio invocando a generarCodigo
 		String codigoGenerado = generarCodigo();
-		// crea el una nuevaMaquina yla agrega a maquina con todos los datos
-		Maquina nuevaMaquina = new Maquina(nombreCerveza, descripcion, precioPorML, codigoGenerado);
-		// Agrega la maquina a la lista
-		maquinas.add(nuevaMaquina);
+		// 2. Reutiliza recuperarMaquina para saber si ya hay una maquina con ese codigo
+		// (si retorna null, el codigo esta libre)
+		Maquina existente = recuperarMaquina(codigoGenerado);
+		// 3. Para preguntar por null se usa == (no .equals: null no tiene metodos)
+		if (existente == null) {
+			// Codigo libre: recien ahora se crea la maquina (solo si se va a usar)
+			Maquina nuevaMaquina = new Maquina(nombreCerveza, descripcion, precioPorML, codigoGenerado);
+			// Se guarda en el atributo maquinas y se confirma con true
+			maquinas.add(nuevaMaquina);
+			return true;
+		} else {
+			// Codigo repetido: no se crea ni se agrega, se avisa con false
+			return false;
+		}
 	}
-	// Metodo cargarMaquinas
 
+	// Metodo cargarMaquinas: llena TODAS las maquinas del negocio.
+	// Recorre la lista con un for (desde 0 hasta size()-1) y a cada maquina
+	// le invoca su metodo llenarMaquina()
 	public void cargarMaquinas() {
-		// Recorre la lista 'maquinas' con un for (desde 0 hasta size()-1)
 		for (int i = 0; i < maquinas.size(); i++) {
+			// Toma la maquina de la posicion i
 			Maquina m = maquinas.get(i);
-			// y llena cada maquina invocando a su metodo llenarMaquina()
+			// Le pide que se llene (cantidadActual = capacidadMaxima - 200)
 			m.llenarMaquina();
 		}
 	}
 
-	// Metodo recuperar maquina
-	// recibe codigo de la maquina
+	// Metodo recuperarMaquina (busqueda lineal): recibe un codigo y busca la
+	// maquina.
+	// Retorna la maquina que tiene ese codigo, o null si ninguna lo tiene
 	public Maquina recuperarMaquina(String codigo) {
-		// Busca en la lista
+		// Recorre la lista revisando una por una
 		for (int i = 0; i < maquinas.size(); i++) {
 			Maquina m = maquinas.get(i);
-			// Recibe el codigo, recorre la lista y compara el codigo de cada maquina con
-			// .equals()
+			// Compara el codigo de la maquina con el recibido (String -> .equals)
 			if (m.getCodigo().equals(codigo)) {
-				// Si la encuentra la retorna en ese momento; si termina el for sin encontrarla,
-				// retorna null
+				// La encontro: la retorna en ese momento y el metodo termina
 				return m;
 			}
 		}
+		// Termino el for sin encontrarla: el return null va FUERA del for
 		return null;
-
 	}
 
 }
