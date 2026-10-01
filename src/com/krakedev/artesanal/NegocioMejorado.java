@@ -118,4 +118,19 @@ public class NegocioMejorado {
 
 	}
 
+	// Metodo buscarClientePorCodigo
+	public Cliente buscarClientePorCodigo(int codigo) {
+		// recibe el codigo y retorna el cliente o null si no existe
+		// recorre la lista
+		for (int i = 0; i < clientes.size(); i++) {
+			// Toma cliente en la posicion i
+			Cliente c = clientes.get(i);
+			// Si el codigo es igual al recibido retorna cliente
+			if (c.getCodigo() == codigo) {
+				return c;
+			}
+		}
+		return null;
+	}
+
 }
