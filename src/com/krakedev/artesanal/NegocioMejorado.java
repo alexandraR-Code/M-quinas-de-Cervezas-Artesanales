@@ -141,6 +141,9 @@ public class NegocioMejorado {
 		Cliente c = buscarClientePorCodigo(codigoCliente);
 		// La maquina encontrada (m) sirve la cantidad y se guarda el valor que retorna
 		double valorConsumido = m.servirCerveza(cantidad);
+		// Registra el consumo: suma el valor a la cuenta del cliente
+		registrarConsumo(c, valorConsumido);
+
 	}
 
 	// Metodo registrarConsumo: suma el valor al totalConsumido del cliente.
