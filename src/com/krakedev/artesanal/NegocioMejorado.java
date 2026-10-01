@@ -133,4 +133,14 @@ public class NegocioMejorado {
 		return null;
 	}
 
+	// Metodo consumirCerveza
+	public void consumirCerveza(int codigoCliente, String codigoMaquina, double cantidad) {
+		// Buscar maquina invocando a recuperarMaquina
+		Maquina m = recuperarMaquina(codigoMaquina);
+		// Busca el cliente reutilizando buscarClientePorCodigo
+		Cliente c = buscarClientePorCodigo(codigoCliente);
+		// La maquina encontrada (m) sirve la cantidad y se guarda el valor que retorna
+		double valorConsumido = m.servirCerveza(cantidad);
+	}
+
 }
