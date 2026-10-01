@@ -101,4 +101,21 @@ public class NegocioMejorado {
 
 	}
 
+	// Metodo buscarClientePorCedula
+	public Cliente buscarClientePorCedula(String cedula) {
+		// Recibe una cedula y retorna el Cliente que la tiene, o null si no existe
+		// Recorrer las lista clientes
+		for (int i = 0; i < clientes.size(); i++) {
+			// Tomo a cliente en la posicion i
+			Cliente c = clientes.get(i);
+			// Si la cedula de ese cliente es igual a la cedula recibida retorna cliente
+			if (c.getCedula().equals(cedula)) {
+				return c;
+			}
+
+		}
+		return null;
+
+	}
+
 }
