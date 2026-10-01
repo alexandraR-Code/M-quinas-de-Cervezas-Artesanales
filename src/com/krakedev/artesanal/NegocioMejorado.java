@@ -7,11 +7,13 @@ public class NegocioMejorado {
 	// Atributo: lista (ArrayList) donde el negocio guarda TODAS sus maquinas.
 	// Es la evolucion de Negocio, que solo tenia una maquina (maquinaA)
 	ArrayList<Maquina> maquinas;
-	
+
 	// Atributo: lista donde el negocio guarda los clientes registrados.
 	// A proposito NO se inicializa (punto 8 del taller): vale null,
 	// por eso al hacer clientes.add(...) se producira un NullPointerException
 	private ArrayList<Cliente> clientes;
+	// Guarda el ultimo numero del cliente
+	private int ultimoCodigo = 100;
 
 	// Getter y setter del atributo maquinas (encapsulamiento)
 	public ArrayList<Maquina> getMaquinas() {
@@ -87,6 +89,18 @@ public class NegocioMejorado {
 		}
 		// Termino el for sin encontrarla: el return null va FUERA del for
 		return null;
+	}
+
+	// Metodo registarCliente
+	public void registrarCliente(String nombre, String cedula) {
+		// Generar el codigo consecutivo y aumneta en 1
+		int codigo = ultimoCodigo++;
+		// Crear la instancia de cliente
+		Cliente nuevoCliente = new Cliente(nombre, cedula);
+		// Asignar objeto a la lista
+		nuevoCliente.setCodigo(codigo);
+		clientes.add(nuevoCliente);
+
 	}
 
 }
