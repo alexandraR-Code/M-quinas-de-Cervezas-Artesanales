@@ -9,9 +9,7 @@ public class NegocioMejorado {
 	ArrayList<Maquina> maquinas;
 
 	// Atributo: lista donde el negocio guarda los clientes registrados.
-	// A proposito NO se inicializa (punto 8 del taller): vale null,
-	// por eso al hacer clientes.add(...) se producira un NullPointerException
-	private ArrayList<Cliente> clientes;
+	private ArrayList<Cliente> clientes = new ArrayList<>();
 	// Guarda el ultimo numero del cliente
 	private int ultimoCodigo = 100;
 
