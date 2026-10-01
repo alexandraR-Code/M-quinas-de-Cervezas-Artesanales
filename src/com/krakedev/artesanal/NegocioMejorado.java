@@ -143,4 +143,11 @@ public class NegocioMejorado {
 		double valorConsumido = m.servirCerveza(cantidad);
 	}
 
+	// Metodo registrarConsumo: suma el valor al totalConsumido del cliente.
+	// ACUMULA (no reemplaza): lo que ya debia + el valor nuevo
+	public void registrarConsumo(Cliente cliente, double valor) {
+		cliente.setTotalConsumido(cliente.getTotalConsumido() + valor);
+
+	}
+
 }
