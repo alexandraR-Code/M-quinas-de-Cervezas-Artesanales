@@ -40,5 +40,13 @@ public class Cliente {
 		this.nombre = nombre;
 		this.cedula = cedula;
 	}
+	@Override
+	public String toString() {
+		return "Cliente [nombre=" + nombre + ", cedula=" + cedula + ", codigo=" + codigo + ", totalConsumido="
+				+ totalConsumido + "]";
+	}
+	
+	
+	
 
 }

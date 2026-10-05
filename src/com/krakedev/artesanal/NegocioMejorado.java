@@ -33,7 +33,7 @@ public class NegocioMejorado {
 	// Math.random() da 0 a 0.99 -> *100 da 0 a 99.9 -> (int) corta a 0..99 -> +1 da
 	// 1..100
 	public String generarCodigo() {
-		int numeroAleatorio = (int) (Math.random() * 100) + 1;
+		int numeroAleatorio = (int) (Math.random() * 500) + 1;
 		return "M-" + numeroAleatorio;
 	}
 
@@ -109,11 +109,13 @@ public class NegocioMejorado {
 			// Tomo a cliente en la posicion i
 			Cliente c = clientes.get(i);
 			// Si la cedula de ese cliente es igual a la cedula recibida retorna cliente
-			if (c.getCedula().equals(cedula)) {
+			if (c.getCedula().equals(cedula.trim())) {
+				System.out.println("Clienete encontrado ");
 				return c;
 			}
 
 		}
+		System.out.println("Cliente no encontrado");
 		return null;
 
 	}
